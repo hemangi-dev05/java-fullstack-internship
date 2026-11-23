@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeakProSys | Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar Toggle -->
+    <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <h2>Peak<span>ProSys</span></h2>
+            <p>Training Institute</p>
+        </div>
+
+        <div class="sidebar-menu">
+            <p class="menu-heading">MAIN MENU</p>
+
+            <nav>
+                <a href="#" class="nav-link active">
+                    <span>▦</span> Dashboard
+                </a>
+
+                <a href="#" class="nav-link">
+                    <span>👨‍🎓</span> Students
+                </a>
+
+                <a href="#" class="nav-link">
+                    <span>📚</span> Courses
+                </a>
+
+                <a href="#" class="nav-link">
+                    <span>👨‍🏫</span> Trainers
+                </a>
+
+                <a href="#" class="nav-link">
+                    <span>📊</span> Reports
+                </a>
+
+                <a href="#" class="nav-link">
+                    <span>⚙</span> Settings
+                </a>
+            </nav>
+        </div>
+
+        <div class="sidebar-bottom">
+            <a href="#" class="nav-link logout">
+                <span>↪</span> Logout
+            </a>
+
+            <div class="sidebar-profile">
+                <div class="avatar">A</div>
+                <div>
+                    <h4>Admin User</h4>
+                    <p>Administrator</p>
+                </div>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- Sidebar Overlay -->
+    <label for="sidebar-toggle" class="sidebar-overlay"
+           aria-label="Close navigation menu"></label>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Topbar -->
+        <header class="topbar">
+
+            <div class="topbar-left">
+                <label for="sidebar-toggle" class="menu-toggle"
+                       aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+
+                <div>
+                    <h2>Dashboard</h2>
+                    <p>Welcome back, Admin!</p>
+                </div>
+            </div>
+
+            <div class="topbar-right">
+                <button class="notification-btn" aria-label="Notifications">
+                    ♧
+                    <span class="notification-dot"></span>
+                </button>
+
+                <div class="topbar-profile">
+                    <div class="avatar">A</div>
+                    <div class="profile-info">
+                        <h4>Admin User</h4>
+                        <p>Administrator</p>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+        <!-- Dashboard Body -->
+        <section class="dashboard-body">
+
+            <div class="welcome-section">
+                <div>
+                    <h1>Overview</h1>
+                    <p>Here's what's happening at PeakProSys today.</p>
+                </div>
+
+                <div class="date-label">📅 Training Overview</div>
+            </div>
+
+            <!-- Statistics -->
+            <section class="stats-grid">
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon blue">👨‍🎓</div>
+                        <span class="stat-trend">+12%</span>
+                    </div>
+                    <p>Total Students</p>
+                    <h2>1,248</h2>
+                    <small>Compared to last month</small>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon purple">📚</div>
+                        <span class="stat-trend">+8%</span>
+                    </div>
+                    <p>Active Courses</p>
+                    <h2>18</h2>
+                    <small>Currently running courses</small>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon orange">👨‍🏫</div>
+                        <span class="stat-trend">+5%</span>
+                    </div>
+                    <p>Total Trainers</p>
+                    <h2>32</h2>
+                    <small>Available trainers</small>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <div class="stat-icon green">₹</div>
+                        <span class="stat-trend">+15%</span>
+                    </div>
+                    <p>Total Revenue</p>
+                    <h2>₹8.4L</h2>
+                    <small>Illustrative revenue data</small>
+                </article>
+
+            </section>
+
+            <!-- Main Dashboard Grid -->
+            <section class="content-grid">
+
+                <!-- Recent Registrations -->
+                <article class="panel registrations-panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <h3>Recent Registrations</h3>
+                            <p>Latest student admissions</p>
+                        </div>
+                        <a href="#">View All</a>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Course</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="student-cell">
+                                        <div class="table-avatar blue">RP</div>
+                                        <span>Rahul Patil</span>
+                                    </div>
+                                </td>
+                                <td>Java Full Stack</td>
+                                <td>20 Nov 2026</td>
+                                <td><span class="status active-status">Active</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="student-cell">
+                                        <div class="table-avatar purple">AS</div>
+                                        <span>Ananya Shah</span>
+                                    </div>
+                                </td>
+                                <td>Web Development</td>
+                                <td>19 Nov 2026</td>
+                                <td><span class="status active-status">Active</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="student-cell">
+                                        <div class="table-avatar orange">VK</div>
+                                        <span>Vishal Kumar</span>
+                                    </div>
+                                </td>
+                                <td>Python Development</td>
+                                <td>18 Nov 2026</td>
+                                <td><span class="status pending-status">Pending</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="student-cell">
+                                        <div class="table-avatar green">PM</div>
+                                        <span>Priya Mehta</span>
+                                    </div>
+                                </td>
+                                <td>Java Full Stack</td>
+                                <td>17 Nov 2026</td>
+                                <td><span class="status active-status">Active</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </article>
+
+                <!-- Upcoming Batches -->
+                <article class="panel batches-panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <h3>Upcoming Batches</h3>
+                            <p>Scheduled training sessions</p>
+                        </div>
+                        <a href="#">View All</a>
+                    </div>
+
+                    <div class="batch-item">
+                        <div class="batch-date">
+                            <strong>25</strong>
+                            <span>NOV</span>
+                        </div>
+                        <div class="batch-info">
+                            <h4>Java Full Stack</h4>
+                            <p>10:00 AM · Monday</p>
+                        </div>
+                    </div>
+
+                    <div class="batch-item">
+                        <div class="batch-date purple-date">
+                            <strong>27</strong>
+                            <span>NOV</span>
+                        </div>
+                        <div class="batch-info">
+                            <h4>Web Development</h4>
+                            <p>11:30 AM · Wednesday</p>
+                        </div>
+                    </div>
+
+                    <div class="batch-item">
+                        <div class="batch-date orange-date">
+                            <strong>29</strong>
+                            <span>NOV</span>
+                        </div>
+                        <div class="batch-info">
+                            <h4>Python Development</h4>
+                            <p>02:00 PM · Friday</p>
+                        </div>
+                    </div>
+
+                </article>
+
+            </section>
+
+            <!-- Course Progress -->
+            <section class="panel progress-panel">
+
+                <div class="panel-header">
+                    <div>
+                        <h3>Course Enrolment Overview</h3>
+                        <p>Student enrolment across popular courses</p>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>Java Full Stack</span>
+                        <strong>85%</strong>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill java-progress"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>Web Development</span>
+                        <strong>70%</strong>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill web-progress"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span>Python Development</span>
+                        <strong>60%</strong>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill python-progress"></div>
+                    </div>
+                </div>
+
+            </section>
+
+            <footer class="footer">
+                <p>© 2026 PeakProSys Training Institute. All rights reserved.</p>
+            </footer>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
