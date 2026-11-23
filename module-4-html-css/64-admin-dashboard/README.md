@@ -1,136 +1,150 @@
-# Assignment 64 â€“ Dashboard Layout using CSS Grid
+# Assignment 64 - Dashboard Layout Using CSS Grid
 
-## Overview
+## 1. Overview
 
-This assignment focuses on building a responsive admin dashboard for PeakProSys Training Institute using HTML5 and CSS3.
+This assignment involves developing a responsive admin dashboard for PeakProSys Training Institute using HTML5 and CSS3.
 
-The dashboard provides a structured interface for viewing student registrations, course information, trainer statistics, upcoming batches and course enrolment progress.
+The dashboard provides an overview of student registrations, courses, trainers, revenue, upcoming batches and course enrolment progress.
 
-CSS Grid is used to organize the main dashboard layout, while Flexbox handles component alignment and spacing. CSS media queries ensure that the interface adapts to desktop, tablet and mobile screen sizes.
+CSS Grid is used for the main page layout and dashboard sections, while Flexbox handles component alignment. Media queries make the dashboard adaptable to desktop, tablet and mobile screens.
 
-## Objectives
+## 2. Objectives
 
-- Build a structured admin dashboard using CSS Grid.
-- Apply Flexbox for component alignment and layout.
-- Create reusable dashboard sections and information cards.
+- Build a structured dashboard using CSS Grid.
+- Use Flexbox for component alignment.
+- Create reusable dashboard cards and content sections.
 - Implement responsive layouts using CSS media queries.
-- Develop a collapsible sidebar with a hamburger menu for smaller screens.
-- Maintain usability across desktop, tablet and mobile devices.
+- Develop collapsible sidebar navigation for smaller screens.
+- Maintain usability across different screen sizes.
 
-## Technologies Used
+## 3. Technologies Used
 
-- HTML5
-- CSS3
-- CSS Grid
-- Flexbox
-- CSS Media Queries
-- IntelliJ IDEA
-- Google Chrome
+| Technology | Purpose |
+|---|---|
+| HTML5 | Dashboard structure and content |
+| CSS3 | Styling and visual presentation |
+| CSS Grid | Main dashboard and card layouts |
+| Flexbox | Navigation and component alignment |
+| Media Queries | Responsive behaviour |
+| IntelliJ IDEA | Development environment |
+| Google Chrome | Browser testing |
 
-## Features Implemented
+## 4. Features Implemented
 
-### 1. Sidebar Navigation
-- Dashboard navigation links for Students, Courses, Trainers, Reports and Settings.
-- Admin profile section and Logout option.
-- Permanent sidebar on desktop screens.
-- Collapsible sidebar with hamburger navigation on tablet and mobile screens.
-- Overlay interaction to close the sidebar.
+### 4.1 Sidebar Navigation
 
-### 2. Dashboard Statistics
-Four information cards display sample data for:
+Provides navigation links for Dashboard, Students, Courses, Trainers, Reports and Settings.
+
+- Permanent sidebar on desktop.
+- Hamburger menu on tablet and mobile.
+- Collapsible navigation with an overlay.
+- Admin profile and logout section.
+
+### 4.2 Dashboard Statistics
+
+Four statistic cards display sample information about:
+
 - Total Students
 - Active Courses
 - Total Trainers
 - Total Revenue
 
-### 3. Recent Registrations
-A responsive table displays sample student registration records, including student names, courses, registration dates and admission statuses.
+### 4.3 Recent Registrations
 
-### 4. Upcoming Batches
-Displays scheduled training batches with their dates, course names and timings.
+Displays student registration records in a structured table containing student names, courses, registration dates and admission statuses.
 
-### 5. Course Enrolment Overview
-Progress indicators visually represent enrolment percentages for Java Full Stack, Web Development and Python Development courses.
+The table supports horizontal scrolling on smaller screens.
 
-## Responsive Design
+### 4.4 Upcoming Batches
 
-The dashboard uses CSS Grid, Flexbox and media queries to adapt its layout to different screen sizes.
+Displays upcoming training batches with their course names, schedules and timings.
 
-| Screen | Width | Layout |
+### 4.5 Course Enrolment Overview
+
+Uses visual progress indicators to represent enrolment levels for Java Full Stack, Web Development and Python Development courses.
+
+## 5. Responsive Design
+
+The dashboard adapts to different screen sizes using CSS Grid, Flexbox and media queries.
+
+| Device | Tested Width | Behaviour |
 |---|---:|---|
-| Desktop | 1366px | Permanent sidebar and four statistic cards in one row |
+| Desktop | 1366px | Permanent sidebar and four statistic cards |
 | Tablet / iPad Mini | 768px | Hamburger navigation and two-column statistics |
-| Mobile | 390px | Collapsible sidebar and compact dashboard |
+| Mobile | 390px | Collapsible sidebar and compact content |
 | Small Mobile | 360px | Single-column statistics layout |
 
-On tablet and mobile screens, the sidebar moves outside the main content area and can be opened using the hamburger menu.
+On tablet and mobile screens, the sidebar moves outside the main content area and opens through the hamburger menu.
 
-The registration table uses horizontal scrolling within its container to preserve its structure on smaller screens.
+## 6. Screenshots
 
-## Concepts Practised
+### Desktop Dashboard
 
-- CSS Grid and grid-template-columns
-- repeat() and minmax()
-- Flexbox layout and alignment
-- CSS media queries and responsive breakpoints
-- Fixed positioning and z-index
+Displays the complete dashboard with permanent sidebar navigation, statistic cards, registration records and upcoming batches.
+
+![Desktop Dashboard](screenshots/desktop-dashboard.png)
+
+### Tablet Dashboard - iPad Mini
+
+Shows the responsive tablet layout with hamburger navigation and adjusted dashboard sections.
+
+![Tablet Dashboard](screenshots/tablet-dashboard.png)
+
+### Mobile Dashboard
+
+Shows the compact mobile layout with collapsible navigation and responsive dashboard content.
+
+![Mobile Dashboard](screenshots/mobile-dashboard.png)
+
+## 7. Concepts Practised
+
+- CSS Grid and `grid-template-columns`
+- `repeat()` and `minmax()`
+- Flexbox alignment and spacing
+- CSS media queries and breakpoints
+- Fixed positioning and `z-index`
 - CSS transitions and hover effects
 - Checkbox-based hamburger navigation
 - Responsive table overflow
 - Reusable CSS classes and variables
 
-## Project Structure
+## 8. Project Structure
 
 ```text
 64-admin-dashboard/
-â”‚
-â”œâ”€â”€ index.html
-â”œâ”€â”€ style.css
-â”œâ”€â”€ README.md
-â”‚
-â””â”€â”€ screenshots/
-    â”œâ”€â”€ desktop-dashboard.png
-    â”œâ”€â”€ tablet-dashboard.png
-    â””â”€â”€ mobile-dashboard.png
+|
+|-- index.html
+|-- style.css
+|-- README.md
+|
+|-- screenshots/
+    |-- desktop-dashboard.png
+    |-- tablet-dashboard.png
+    |-- mobile-dashboard.png
 ```
 
-## Screenshots
+## 9. How to Run
 
-### 1. Desktop Dashboard
+1. Open the `64-admin-dashboard` folder in IntelliJ IDEA.
+2. Open `index.html` in Google Chrome.
+3. Open Chrome Developer Tools to test different viewport sizes.
+4. Test the sidebar toggle on tablet and mobile layouts.
+5. Verify the dashboard sections and horizontal table scrolling.
 
-The desktop layout displays the complete sidebar navigation, dashboard statistics, registration table and upcoming batches.
+No server installation or database setup is required.
 
-![Desktop Dashboard](screenshots/desktop-dashboard.png)
+## 10. Result
 
-### 2. Tablet Dashboard â€“ iPad Mini
+Successfully developed a responsive admin dashboard using HTML5 and CSS3.
 
-The tablet layout uses a hamburger menu instead of a permanently visible sidebar. Dashboard sections adjust to the available screen width.
+The assignment demonstrates the practical use of CSS Grid, Flexbox, responsive breakpoints and collapsible navigation to organize dashboard information across desktop, tablet and mobile devices.
 
-![Tablet Dashboard](screenshots/tablet-dashboard.png)
+## 11. Implementation Note
 
-### 3. Mobile Dashboard
-
-The mobile layout provides compact statistics cards, responsive content sections and collapsible navigation.
-
-![Mobile Dashboard](screenshots/mobile-dashboard.png)
-
-## How to Run
-
-1. Open the assignment folder in IntelliJ IDEA.
-2. Open index.html in Google Chrome.
-3. Use Chrome Developer Tools to test different screen sizes.
-4. Verify the hamburger menu and responsive dashboard layout.
-
-## Result
-
-Successfully developed a responsive admin dashboard using CSS Grid, Flexbox and media queries.
-
-The implementation demonstrates responsive layout design, dashboard component organization and collapsible navigation across desktop, tablet and mobile screen sizes.
-
-**Note:** All student records, statistics, revenue figures and course information are sample demonstration data. This assignment implements the frontend layout only; it does not include backend functionality or database integration.
+This assignment focuses on frontend layout and responsive design. Student records, statistics, revenue figures and course information are sample demonstration data. Backend services, authentication and database integration are not included.
 
 ---
 
-**Assignment:** 64 â€“ Dashboard Layout using CSS Grid
-**Program:** Java Full Stack Development Internship
+**Assignment:** 64 - Dashboard Layout Using CSS Grid  
+**Program:** Java Full Stack Development Internship  
 **Organization:** PeakProSys Solutions Pvt. Ltd.
