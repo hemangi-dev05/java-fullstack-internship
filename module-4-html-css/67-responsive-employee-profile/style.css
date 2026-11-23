@@ -1,0 +1,297 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 85px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #344054;
+    line-height: 1.7;
+}
+
+/* Navigation */
+
+.header {
+    background: #172b4d;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar {
+    max-width: 1100px;
+    min-height: 68px;
+    margin: auto;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #70b7ff;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #e2e8f0;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #70b7ff;
+}
+
+/* Main container */
+
+.container {
+    max-width: 1000px;
+    margin: 35px auto;
+    padding: 0 20px;
+}
+
+/* Profile section */
+
+.profile {
+    background: #e8f1fc;
+    border: 1px solid #d5e4f7;
+    border-radius: 10px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 2px 8px rgba(23, 43, 77, 0.15);
+}
+
+.profile-info h1 {
+    font-size: 29px;
+    color: #172b4d;
+    margin: 7px 0 2px;
+}
+
+.designation {
+    color: #2868a9;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.profile-info p {
+    font-size: 14px;
+    color: #58677c;
+}
+
+.status {
+    color: #247a50;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.contact-button {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 17px;
+    border-radius: 5px;
+    background: #2868a9;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    transition: background 0.2s ease;
+}
+
+.contact-button:hover {
+    background: #172b4d;
+}
+
+/* Common sections */
+
+.section {
+    background: white;
+    padding: 24px;
+    margin-top: 20px;
+    border: 1px solid #e1e7ef;
+    border-radius: 8px;
+}
+
+.section h2 {
+    color: #172b4d;
+    font-size: 20px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #dceafa;
+}
+
+.section h3 {
+    color: #263d5c;
+    font-size: 16px;
+}
+
+.section p {
+    font-size: 14px;
+    color: #58677c;
+}
+
+/* Experience and education */
+
+.item {
+    padding: 12px 0;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.item:last-child {
+    border-bottom: none;
+}
+
+.company {
+    color: #2868a9 !important;
+    font-weight: bold;
+}
+
+.duration {
+    color: #8994a5 !important;
+    font-size: 13px !important;
+}
+
+/* Projects */
+
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.project {
+    padding: 16px;
+    background: #f6f9fd;
+    border: 1px solid #e1e7ef;
+    border-radius: 6px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.project:hover {
+    border-color: #7eaddb;
+    transform: translateY(-3px);
+}
+
+.project p {
+    margin-top: 6px;
+}
+
+/* Skills */
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skills-list span {
+    background: #e8f1fc;
+    color: #245a91;
+    border: 1px solid #d4e4f7;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.skills-list span:hover {
+    background: #2868a9;
+    color: white;
+}
+
+/* Contact */
+
+.section a {
+    color: #2868a9;
+    text-decoration: none;
+}
+
+.section a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: #172b4d;
+    color: #e2e8f0;
+    font-size: 13px;
+    margin-top: 35px;
+}
+
+/* Responsive design */
+
+@media (max-width: 700px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 20px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 10px 18px;
+    }
+
+    .profile {
+        gap: 20px;
+        padding: 22px;
+    }
+
+    .profile-photo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-info h1 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .project-list {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding: 18px;
+    }
+}
