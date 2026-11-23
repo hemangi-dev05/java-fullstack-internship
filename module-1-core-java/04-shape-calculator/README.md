@@ -2,38 +2,39 @@
 
 Assignment 4 of the Java Full Stack Internship at PeakProSys Solutions, Pune.
 
-A console program that finds the area and perimeter of a circle, rectangle, square and triangle. It is built to show method overriding and polymorphism.
+## What is developed
 
-## How it works
+A console program where the user picks a shape, enters its sizes and gets the area and perimeter.
 
-- `Shape` is the parent class. It has `area()`, `perimeter()` and `display()`.
-- `Circle`, `Rectangle`, `Square` and `Triangle` extend `Shape` and override `area()` and `perimeter()` with their own formulas.
-- In `Main`, all shapes are stored in one `ArrayList<Shape>`. When `display()` is called on each one, Java runs the area and perimeter of the actual shape. That is polymorphism.
+- Four shapes: Circle, Rectangle, Square and Triangle
+- Option 5 shows every shape added so far, with the total area
+- Wrong input is handled: text instead of a number, zero or negative sizes, and triangle sides that cannot form a triangle
 
-## Formulas
+## Overriding and polymorphism
 
-| Shape | Area | Perimeter |
-| --- | --- | --- |
-| Circle | `Math.PI * Math.pow(r, 2)` | `2 * Math.PI * r` |
-| Rectangle | `length * width` | `2 * (length + width)` |
-| Square | `Math.pow(side, 2)` | `4 * side` |
-| Triangle | Heron's formula with `Math.sqrt` | `a + b + c` |
+`Shape` is the parent class with `area()` and `perimeter()`. Each shape extends it and overrides both methods with its own formula (using `Math.PI`, `Math.pow` and `Math.sqrt`).
 
-## Checks
+All shapes are stored in one `ArrayList<Shape>`. When `display()` is called on each item, Java runs the area and perimeter of the actual shape. That is polymorphism.
 
-- Sizes must be greater than 0
-- Triangle sides must be able to form a triangle (a + b > c and so on)
-- Text instead of a number asks again instead of crashing
+```mermaid
+classDiagram
+    Shape <|-- Circle
+    Shape <|-- Rectangle
+    Shape <|-- Square
+    Shape <|-- Triangle
+    class Shape {
+        +area()
+        +perimeter()
+        +display()
+    }
+```
 
-## Code
+## Files
 
 Package: `com.internship.module1.shapecalculator`
 
 - `Shape.java` - parent class
-- `Circle.java`
-- `Rectangle.java`
-- `Square.java`
-- `Triangle.java`
+- `Circle.java`, `Rectangle.java`, `Square.java`, `Triangle.java` - child classes
 - `Main.java` - menu and input
 
 ## How to run
@@ -47,6 +48,53 @@ java -cp out com.internship.module1.shapecalculator.Main
 
 Or open the project in IntelliJ and run `Main`.
 
+## Example
+
+```
+Enter choice: 1
+Enter radius: 5
+Circle -> Area: 78.54, Perimeter: 31.42
+```
 ## Screenshots
 
-Screenshots are in the `screenshots` folder.
+### Output
+
+**Circle**
+
+Choice 1 with radius 5. The program prints the area and perimeter of the circle.
+
+![Circle](<screenshots/circle.png>)
+
+**Rectangle**
+
+Choice 2 with length 4 and width 6. Area is 24.00 and perimeter is 20.00.
+
+![Rectangle](<screenshots/rectangle.png>)
+
+**Square**
+
+Choice 3 with side 5. Area is 25.00 and perimeter is 20.00.
+
+![Square](<screenshots/square.png>)
+
+**Triangle**
+
+Choice 4 with sides 3, 4 and 5. Area comes from Heron's formula and is 6.00.
+
+![Triangle](<screenshots/triangle.png>)
+
+**Show all shapes**
+
+Choice 5 lists every shape added so far and prints the total area. The loop calls the same method on each shape, but each one gives its own result.
+
+![Show all shapes](<screenshots/show all.png>)
+
+**Invalid input**
+
+Text instead of a number is rejected and asked again, a zero or negative radius gives an error, and sides like 1, 2, 10 are rejected because they cannot form a triangle.
+
+![Invalid input](<screenshots/errors.png>)
+
+### Code (IDE)
+
+To be added.
