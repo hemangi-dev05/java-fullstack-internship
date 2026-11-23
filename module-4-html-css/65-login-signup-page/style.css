@@ -1,0 +1,412 @@
+
+/* =========================================
+   Assignment 65 - Login / Signup Page
+   PeakProSys Training Institute
+========================================= */
+
+/* 1. Global Reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #3730a3;
+    --background: #f4f6fb;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --white: #ffffff;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--background);
+    color: var(--text-dark);
+    min-height: 100vh;
+}
+
+/* 2. Main Container */
+
+.auth-container {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+/* 3. Welcome Panel */
+
+.welcome-panel {
+    background: linear-gradient(145deg, #312e81, #4f46e5, #6366f1);
+    color: var(--white);
+    padding: 55px 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-panel::before {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    right: -120px;
+    top: 15%;
+}
+
+.welcome-panel::after {
+    content: "";
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    right: -65px;
+    top: 22%;
+}
+
+.brand {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 1;
+}
+
+.brand span {
+    color: #c7d2fe;
+}
+
+.welcome-content {
+    max-width: 480px;
+    position: relative;
+    z-index: 1;
+}
+
+.eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #818cf8;
+    margin-bottom: 16px;
+}
+
+.welcome-panel .eyebrow {
+    color: #c7d2fe;
+}
+
+.welcome-content h1 {
+    font-size: clamp(34px, 4vw, 48px);
+    line-height: 1.2;
+    margin-bottom: 22px;
+    font-weight: 750;
+}
+
+.welcome-content > p:last-child {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #e0e7ff;
+    max-width: 420px;
+}
+
+.welcome-footer {
+    font-size: 13px;
+    color: #c7d2fe;
+    position: relative;
+    z-index: 1;
+}
+
+/* 4. Form Panel */
+
+.form-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 35px;
+    background: var(--white);
+}
+
+.form-wrapper {
+    width: 100%;
+    max-width: 430px;
+}
+
+.form-heading {
+    margin-bottom: 28px;
+}
+
+.form-heading h2 {
+    font-size: 29px;
+    margin-bottom: 9px;
+    color: var(--text-dark);
+}
+
+.form-heading > p:last-child {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* 5. Login / Signup Tabs */
+
+.form-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    background: #f1f5f9;
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 27px;
+}
+
+.tab {
+    border: none;
+    background: transparent;
+    padding: 12px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.tab.active {
+    background: var(--white);
+    color: var(--primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.tab:hover {
+    color: var(--primary);
+}
+
+/* 6. Form Fields */
+
+.auth-form {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 19px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 650;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+
+.form-group input {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    color: var(--text-dark);
+    background: #ffffff;
+    transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.form-group input::placeholder {
+    color: #94a3b8;
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+/* 7. Remember Me and Forgot Password */
+
+.form-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 5px 0 24px;
+    font-size: 12px;
+}
+
+.remember,
+.terms {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+.remember input,
+.terms input {
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+.form-options a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.form-options a:hover {
+    text-decoration: underline;
+}
+
+/* 8. Terms and Conditions */
+
+.terms {
+    font-size: 12px;
+    margin: 5px 0 20px;
+}
+
+/* 9. Submit Button */
+
+.submit-btn {
+    width: 100%;
+    height: 49px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+
+.submit-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(79, 70, 229, 0.2);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* 10. Form Switching Text */
+
+.switch-text {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.text-btn {
+    border: none;
+    background: transparent;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.text-btn:hover {
+    text-decoration: underline;
+}
+
+/* 11. Hidden Form */
+
+.hidden {
+    display: none;
+}
+
+/* 12. Responsive Design - Tablet */
+
+@media screen and (max-width: 900px) {
+
+    .auth-container {
+        grid-template-columns: 0.85fr 1.15fr;
+    }
+
+    .welcome-panel {
+        padding: 40px 30px;
+    }
+
+    .welcome-content h1 {
+        font-size: 34px;
+    }
+
+    .form-panel {
+        padding: 40px 25px;
+    }
+
+}
+
+/* 13. Responsive Design - Mobile */
+
+@media screen and (max-width: 650px) {
+
+    .auth-container {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome-panel {
+        min-height: 230px;
+        padding: 28px 25px;
+        gap: 35px;
+    }
+
+    .brand {
+        font-size: 24px;
+    }
+
+    .welcome-content h1 {
+        font-size: 27px;
+        margin-bottom: 12px;
+    }
+
+    .welcome-content > p:last-child {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .welcome-footer {
+        font-size: 11px;
+    }
+
+    .form-panel {
+        padding: 38px 22px;
+    }
+
+    .form-heading h2 {
+        font-size: 25px;
+    }
+
+}
+
+/* 14. Small Mobile Devices */
+
+@media screen and (max-width: 380px) {
+
+    .welcome-panel {
+        padding: 24px 18px;
+    }
+
+    .form-panel {
+        padding: 30px 17px;
+    }
+
+    .form-heading h2 {
+        font-size: 23px;
+    }
+
+    .form-options {
+        font-size: 11px;
+    }
+
+}

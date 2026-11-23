@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PeakProSys Training Institute login and registration page">
+    <title>Login | PeakProSys Training Institute</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="auth-container">
+
+    <section class="welcome-panel">
+        <div class="brand">Peak<span>ProSys</span></div>
+
+        <div class="welcome-content">
+            <p class="eyebrow">LEARN. BUILD. GROW.</p>
+            <h1>Build your future with the right skills.</h1>
+            <p>
+                Access your learning dashboard, explore professional
+                courses and take the next step in your career.
+            </p>
+        </div>
+
+        <div class="welcome-footer">
+            © 2026 PeakProSys Training Institute
+        </div>
+    </section>
+
+    <main class="form-panel">
+
+        <div class="form-wrapper">
+
+            <div class="form-heading">
+                <p class="eyebrow">WELCOME BACK</p>
+                <h2>Access your account</h2>
+                <p>Enter your details to continue learning.</p>
+            </div>
+
+            <div class="form-tabs">
+                <button type="button" class="tab active" id="loginTab">
+                    Login
+                </button>
+                <button type="button" class="tab" id="signupTab">
+                    Sign Up
+                </button>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input
+                            type="email"
+                            id="loginEmail"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input
+                            type="password"
+                            id="loginPassword"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                    >
+                </div>
+
+                <div class="form-options">
+                    <label class="remember">
+                        <input type="checkbox" name="remember">
+                        Remember me
+                    </label>
+                    <a href="#forgot-password">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Login to Account
+                </button>
+
+                <p class="switch-text">
+                    Don't have an account?
+                    <button type="button" class="text-btn" id="showSignup">
+                        Sign up
+                    </button>
+                </p>
+
+            </form>
+
+            <form id="signupForm" class="auth-form hidden">
+
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            minlength="3"
+                            autocomplete="name"
+                            required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input
+                            type="email"
+                            id="signupEmail"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input
+                            type="tel"
+                            id="mobile"
+                            name="mobile"
+                            placeholder="10-digit mobile number"
+                            pattern="[6-9][0-9]{9}"
+                            title="Enter a valid 10-digit Indian mobile number"
+                            autocomplete="tel"
+                            required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input
+                            type="password"
+                            id="signupPassword"
+                            name="password"
+                            placeholder="Minimum 8 characters"
+                            minlength="8"
+                            autocomplete="new-password"
+                            required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Re-enter your password"
+                            minlength="8"
+                            autocomplete="new-password"
+                            required
+                    >
+                </div>
+
+                <label class="terms">
+                    <input type="checkbox" name="terms" required>
+                    I agree to the Terms and Conditions.
+                </label>
+
+                <button type="submit" class="submit-btn">
+                    Create Account
+                </button>
+
+                <p class="switch-text">
+                    Already have an account?
+                    <button type="button" class="text-btn" id="showLogin">
+                        Login
+                    </button>
+                </p>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+<script src="script.js"></script>
+</body>
+</body>
+</html>
