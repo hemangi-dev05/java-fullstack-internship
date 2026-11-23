@@ -16,17 +16,13 @@ A console program where the user picks a shape, enters its sizes and gets the ar
 
 All shapes are stored in one `ArrayList<Shape>`. When `display()` is called on each item, Java runs the area and perimeter of the actual shape. That is polymorphism.
 
-```mermaid
-classDiagram
-    Shape <|-- Circle
-    Shape <|-- Rectangle
-    Shape <|-- Square
-    Shape <|-- Triangle
-    class Shape {
-        +area()
-        +perimeter()
-        +display()
-    }
+```
+              Shape
+   area() | perimeter() | display()
+                |
+    +-----------+-----------+-----------+
+    |           |           |           |
+ Circle     Rectangle     Square     Triangle
 ```
 
 ## Files
