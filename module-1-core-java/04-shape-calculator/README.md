@@ -94,7 +94,3 @@ Choice 5 lists every shape added so far and prints the total area. The loop call
 Text instead of a number is rejected and asked again, a zero or negative radius gives an error, and sides like 1, 2, 10 are rejected because they cannot form a triangle.
 
 ![Invalid input](<screenshots/errors.png>)
-
-### Code (IDE)
-
-To be added.
