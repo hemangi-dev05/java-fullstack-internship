@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration | PeakProSys</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <h2>PeakProSys</h2>
+        <p>Student Registration Portal</p>
+    </div>
+</header>
+
+<main class="container">
+    <section class="form-card">
+        <div class="form-heading">
+            <h1>Student Registration</h1>
+            <p>Fill in your details to apply for a training program.</p>
+        </div>
+
+        <form action="#" method="post">
+
+            <h3>Personal Information</h3>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName"
+                           placeholder="Enter your full name"
+                           minlength="3" maxlength="50" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email"
+                           placeholder="example@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Mobile Number</label>
+                    <input type="tel" id="phone" name="phone"
+                           placeholder="10-digit mobile number"
+                           pattern="[6-9][0-9]{9}"
+                           title="Enter a valid 10-digit Indian mobile number"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select gender</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="other">Other</option>
+                        <option value="prefer-not-to-say">Prefer not to say</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="qualification">Highest Qualification</label>
+                    <select id="qualification" name="qualification" required>
+                        <option value="">Select qualification</option>
+                        <option value="10th">10th</option>
+                        <option value="12th">12th</option>
+                        <option value="diploma">Diploma</option>
+                        <option value="graduate">Graduate</option>
+                        <option value="postgraduate">Postgraduate</option>
+                    </select>
+                </div>
+            </div>
+
+            <h3>Course Information</h3>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="course">Select Course</label>
+                    <select id="course" name="course" required>
+                        <option value="">Choose a course</option>
+                        <option value="java-full-stack">Java Full Stack</option>
+                        <option value="web-development">Web Development</option>
+                        <option value="python-development">Python Development</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="mode">Training Mode</label>
+                    <select id="mode" name="mode" required>
+                        <option value="">Select training mode</option>
+                        <option value="classroom">Classroom</option>
+                        <option value="online">Online</option>
+                    </select>
+                </div>
+            </div>
+
+            <h3>Contact Information</h3>
+
+            <div class="form-group">
+                <label for="address">Full Address</label>
+                <textarea id="address" name="address"
+                          placeholder="Enter your full address"
+                          minlength="10" maxlength="250" required></textarea>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I confirm that the information provided is correct.</label>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">Submit Registration</button>
+                <button type="reset" class="reset-btn">Reset Form</button>
+            </div>
+
+        </form>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2026 PeakProSys Solutions Pvt. Ltd. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
