@@ -1,185 +1,290 @@
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
-    // Common elements
-    const getElement = (id) => document.getElementById(id);
-    let toastTimer;
+    // 1. Common helpers
 
-    // Show notification
+    const getElement = id => document.getElementById(id);
+
+    const toast = getElement("toast");
+
     function showToast(message) {
-        const toast = getElement("toast");
         if (!toast) return;
 
         toast.textContent = message;
         toast.classList.add("show");
 
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => {
+        clearTimeout(showToast.timeout);
+
+        showToast.timeout = setTimeout(() => {
             toast.classList.remove("show");
         }, 2500);
     }
 
-    // Display current date
+    function readStorage(key, fallback) {
+        try {
+            const savedData = localStorage.getItem(key);
+            return savedData ? JSON.parse(savedData) : fallback;
+        } catch (error) {
+            console.error(`Unable to read ${key}:`, error);
+            return fallback;
+        }
+    }
+
+    function saveStorage(key, value) {
+        try {
+            localStorage.setItem(key, JSON.stringify(value));
+        } catch (error) {
+            console.error(`Unable to save ${key}:`, error);
+            showToast("Unable to save changes in this browser.");
+        }
+    }
+
+    function setText(id, value) {
+        const element = getElement(id);
+        if (element) element.textContent = value;
+    }
+
+
+    // 2. Current date
+
     const currentDate = getElement("currentDate");
 
     if (currentDate) {
-        currentDate.textContent = new Date().toLocaleDateString("en-IN", {
+        currentDate.textContent = new Intl.DateTimeFormat("en-IN", {
             weekday: "short",
             day: "numeric",
             month: "short",
             year: "numeric"
-        });
+        }).format(new Date());
     }
 
-    // Switch between light and dark themes
+
+    // 3. Theme settings
+
     const themeToggle = getElement("themeToggle");
     const themeIcon = getElement("themeIcon");
+    const htmlElement = document.documentElement;
 
-    const savedTheme = localStorage.getItem("peakprosys-theme") || "light";
+    function applyTheme(theme) {
+        htmlElement.setAttribute("data-theme", theme);
 
-    document.documentElement.setAttribute("data-theme", savedTheme);
+        if (themeIcon) {
+            themeIcon.textContent = theme === "dark" ? "☀" : "☾";
+        }
 
-    function updateThemeIcon(theme) {
-        if (!themeIcon || !themeToggle) return;
-
-        themeIcon.textContent = theme === "dark" ? "☀" : "☾";
-        themeToggle.setAttribute(
+        themeToggle?.setAttribute(
             "aria-label",
             theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
         );
     }
 
-    updateThemeIcon(savedTheme);
+    const initialTheme = localStorage.getItem("peakprosys-theme") === "dark"
+        ? "dark"
+        : "light";
 
-    if (themeToggle) {
-        themeToggle.addEventListener("click", function () {
-            const currentTheme = document.documentElement.getAttribute("data-theme");
-            const newTheme = currentTheme === "dark" ? "light" : "dark";
+    applyTheme(initialTheme);
 
-            document.documentElement.setAttribute("data-theme", newTheme);
-            localStorage.setItem("peakprosys-theme", newTheme);
+    themeToggle?.addEventListener("click", () => {
+        const currentTheme = htmlElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
 
-            updateThemeIcon(newTheme);
-        });
-    }
+        applyTheme(newTheme);
+        localStorage.setItem("peakprosys-theme", newTheme);
 
-    // Mobile sidebar navigation
+        showToast(`${newTheme === "dark" ? "Dark" : "Light"} theme enabled.`);
+    });
+
+
+    // 4. Mobile sidebar
+
     const sidebar = getElement("sidebar");
     const menuToggle = getElement("menuToggle");
     const sidebarOverlay = getElement("sidebarOverlay");
 
     function closeSidebar() {
-        if (sidebar) sidebar.classList.remove("open");
-        if (sidebarOverlay) sidebarOverlay.classList.remove("show");
+        sidebar?.classList.remove("open");
+        sidebarOverlay?.classList.remove("show");
     }
 
-    if (menuToggle) {
-        menuToggle.addEventListener("click", function () {
-            if (sidebar) sidebar.classList.toggle("open");
-            if (sidebarOverlay) sidebarOverlay.classList.toggle("show");
-        });
+    function openSidebar() {
+        sidebar?.classList.add("open");
+        sidebarOverlay?.classList.add("show");
     }
 
-    if (sidebarOverlay) {
-        sidebarOverlay.addEventListener("click", closeSidebar);
-    }
+    menuToggle?.addEventListener("click", () => {
+        sidebar?.classList.contains("open")
+            ? closeSidebar()
+            : openSidebar();
+    });
 
-    // Update the selected navigation item
+    sidebarOverlay?.addEventListener("click", closeSidebar);
+
+
+    // 5. Sidebar navigation
+
     const navLinks = document.querySelectorAll(".nav-link");
-    const breadcrumbPage = getElement("breadcrumbPage");
-    const pageTitle = getElement("pageTitle");
+    const pageTitle = getElement("breadcrumbPage");
 
     navLinks.forEach(link => {
-        link.addEventListener("click", function () {
+        link.addEventListener("click", () => {
             navLinks.forEach(item => item.classList.remove("active"));
-            this.classList.add("active");
+            link.classList.add("active");
 
-            const page = this.dataset.page;
+            const page = link.dataset.page;
 
-            if (breadcrumbPage) breadcrumbPage.textContent = page;
-            if (pageTitle) pageTitle.textContent = page;
+            if (pageTitle) {
+                pageTitle.textContent = page;
+            }
 
             closeSidebar();
+
+            if (page !== "Overview" && page !== "Students") {
+                showToast(`${page} section is planned for a future module.`);
+            }
         });
     });
 
-    // Load saved students or use sample records
+
+    // 6. Student data
+
     const defaultStudents = [
         {
+            id: 1,
             name: "Aarav Sharma",
             email: "aarav@example.com",
             course: "Java Full Stack",
-            date: "2026-11-20",
+            date: "2026-06-10",
             status: "Active"
         },
         {
+            id: 2,
             name: "Priya Patil",
             email: "priya@example.com",
             course: "Python Development",
-            date: "2026-11-19",
-            status: "Pending"
-        },
-        {
-            name: "Rohan Deshmukh",
-            email: "rohan@example.com",
-            course: "Web Development",
-            date: "2026-11-17",
+            date: "2026-06-12",
             status: "Active"
         },
         {
+            id: 3,
+            name: "Rohan Deshmukh",
+            email: "rohan@example.com",
+            course: "Web Development",
+            date: "2026-06-15",
+            status: "Pending"
+        },
+        {
+            id: 4,
             name: "Sneha Kulkarni",
             email: "sneha@example.com",
             course: "Java Full Stack",
-            date: "2026-11-15",
+            date: "2026-06-18",
             status: "Completed"
         },
         {
+            id: 5,
             name: "Aditya Joshi",
             email: "aditya@example.com",
-            course: "Python Development",
-            date: "2026-11-12",
+            course: "Data Analytics",
+            date: "2026-06-20",
             status: "Active"
         }
     ];
 
-    let students;
+    let students = readStorage("peakprosys-students", null);
 
-    try {
-        const savedStudents = localStorage.getItem("peakprosys-students");
-        students = savedStudents ? JSON.parse(savedStudents) : defaultStudents;
-        if (!Array.isArray(students)) students = defaultStudents;
-    } catch {
+    if (!Array.isArray(students)) {
         students = defaultStudents;
+        saveStorage("peakprosys-students", students);
     }
 
-    // Save student records
-    function saveStudents() {
-        localStorage.setItem("peakprosys-students", JSON.stringify(students));
-    }
+    let currentSort = "date";
+    let sortAscending = false;
 
-    // Student table elements
     const studentTableBody = getElement("studentTableBody");
     const studentSearch = getElement("studentSearch");
     const statusFilter = getElement("statusFilter");
-    const studentCount = getElement("studentCount");
     const emptyStudents = getElement("emptyStudents");
+    const studentCount = getElement("studentCount");
 
-    let sortField = "date";
-    let sortAscending = false;
 
-    // Display students in the table
+    // 7. Student analytics
+
+    function updateStudentAnalytics() {
+
+        // filter(): count students by status
+
+        const activeCount = students.filter(
+            student => student.status === "Active"
+        ).length;
+
+        const pendingCount = students.filter(
+            student => student.status === "Pending"
+        ).length;
+
+        const completedCount = students.filter(
+            student => student.status === "Completed"
+        ).length;
+
+        setText("totalStudents", students.length);
+        setText("activeStudents", activeCount);
+        setText("pendingStudents", pendingCount);
+        setText("completedStudents", completedCount);
+        setText("studentNavCount", students.length);
+
+        // reduce(): calculate course-wise enrollment
+
+        const courseTotals = students.reduce((totals, student) => {
+            totals[student.course] = (totals[student.course] || 0) + 1;
+            return totals;
+        }, {});
+
+        // map(): convert course totals into readable summaries
+
+        const courseSummary = Object.entries(courseTotals).map(
+            ([course, count]) => `${course}: ${count} students`
+        );
+
+        // some(): check whether at least one student is pending
+
+        const hasPendingStudents = students.some(
+            student => student.status === "Pending"
+        );
+
+        // every(): check whether all student records are valid
+
+        const allStudentsValid = students.every(student =>
+            student.name?.trim() &&
+            student.email?.trim() &&
+            student.course?.trim() &&
+            student.date &&
+            ["Active", "Pending", "Completed"].includes(student.status)
+        );
+
+        // Store analytics information for dashboard inspection
+
+        const dashboard = document.querySelector(".app-shell");
+
+        if (dashboard) {
+            dashboard.dataset.hasPendingStudents = String(hasPendingStudents);
+            dashboard.dataset.allStudentsValid = String(allStudentsValid);
+        }
+
+        console.log("Course enrollment summary:", courseSummary);
+    }
+
+
+    // 8. Student table rendering
+
     function renderStudents() {
         if (!studentTableBody) return;
 
-        const searchText = studentSearch
-            ? studentSearch.value.trim().toLowerCase()
-            : "";
+        const searchText = studentSearch?.value.trim().toLowerCase() || "";
+        const selectedStatus = statusFilter?.value || "all";
 
-        const selectedStatus = statusFilter
-            ? statusFilter.value.toLowerCase()
-            : "all";
+        // filter(): search students by name, email, course and status
 
         const filteredStudents = students.filter(student => {
+
             const matchesSearch =
                 student.name.toLowerCase().includes(searchText) ||
                 student.email.toLowerCase().includes(searchText) ||
@@ -187,100 +292,123 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const matchesStatus =
                 selectedStatus === "all" ||
-                student.status.toLowerCase() === selectedStatus;
+                student.status === selectedStatus;
 
             return matchesSearch && matchesStatus;
         });
 
-        filteredStudents.sort((a, b) => {
-            const first = String(a[sortField]).toLowerCase();
-            const second = String(b[sortField]).toLowerCase();
+        // sort(): arrange students by name or enrollment date
 
-            return sortAscending
-                ? first.localeCompare(second)
-                : second.localeCompare(first);
+        filteredStudents.sort((first, second) => {
+            const comparison = currentSort === "name"
+                ? first.name.localeCompare(second.name)
+                : first.date.localeCompare(second.date);
+
+            return sortAscending ? comparison : -comparison;
         });
 
         studentTableBody.replaceChildren();
 
-        filteredStudents.forEach(student => {
+        // map(): create a table row for every filtered student
+
+        const rows = filteredStudents.map(student => {
+
             const row = document.createElement("tr");
 
             const initials = student.name
                 .split(" ")
-                .map(part => part.charAt(0))
-                .slice(0, 2)
+                .map(part => part[0])
                 .join("")
+                .slice(0, 2)
                 .toUpperCase();
 
             const studentCell = document.createElement("td");
-            const studentInfo = document.createElement("div");
+            const studentWrapper = document.createElement("div");
+
+            studentWrapper.className = "student-cell";
+
             const avatar = document.createElement("div");
-            const nameContainer = document.createElement("div");
-            const name = document.createElement("strong");
-            const email = document.createElement("span");
-
-            studentInfo.className = "student-cell";
             avatar.className = "student-avatar";
-            nameContainer.className = "student-name";
-
             avatar.textContent = initials;
+
+            const nameWrapper = document.createElement("div");
+            nameWrapper.className = "student-name";
+
+            const name = document.createElement("strong");
             name.textContent = student.name;
+
+            const email = document.createElement("span");
             email.textContent = student.email;
 
-            nameContainer.append(name, email);
-            studentInfo.append(avatar, nameContainer);
-            studentCell.appendChild(studentInfo);
+            nameWrapper.append(name, email);
+            studentWrapper.append(avatar, nameWrapper);
+            studentCell.appendChild(studentWrapper);
 
             const courseCell = document.createElement("td");
             courseCell.textContent = student.course;
 
             const dateCell = document.createElement("td");
-            dateCell.textContent = new Date(student.date + "T00:00:00")
-                .toLocaleDateString("en-IN", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric"
-                });
+            dateCell.textContent = new Date(
+                `${student.date}T00:00:00`
+            ).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            });
 
             const statusCell = document.createElement("td");
-            const status = document.createElement("span");
+            const statusBadge = document.createElement("span");
 
-            status.className = "status-pill status-" + student.status.toLowerCase();
-            status.textContent = student.status;
+            statusBadge.className =
+                `status-pill status-${student.status.toLowerCase()}`;
 
-            statusCell.appendChild(status);
-            row.append(studentCell, courseCell, dateCell, statusCell);
-            studentTableBody.appendChild(row);
+            statusBadge.textContent = student.status;
+            statusCell.appendChild(statusBadge);
+
+            row.append(
+                studentCell,
+                courseCell,
+                dateCell,
+                statusCell
+            );
+
+            return row;
         });
+
+        rows.forEach(row => studentTableBody.appendChild(row));
+
+        if (emptyStudents) {
+            emptyStudents.hidden = filteredStudents.length !== 0;
+        }
 
         if (studentCount) {
             studentCount.textContent =
                 `Showing ${filteredStudents.length} of ${students.length} students`;
         }
 
-        if (emptyStudents) {
-            emptyStudents.hidden = filteredStudents.length !== 0;
-        }
+        updateStudentAnalytics();
     }
 
-    if (studentSearch) {
-        studentSearch.addEventListener("input", renderStudents);
-    }
 
-    if (statusFilter) {
-        statusFilter.addEventListener("change", renderStudents);
-    }
+    // 9. Student search and filtering
 
-    // Sort students by name or joining date
-    document.querySelectorAll("[data-sort]").forEach(button => {
-        button.addEventListener("click", function () {
-            const field = this.dataset.sort;
+    studentSearch?.addEventListener("input", renderStudents);
+    statusFilter?.addEventListener("change", renderStudents);
 
-            if (sortField === field) {
+
+    // 10. Student sorting
+
+    document.querySelectorAll(".sort-button").forEach(button => {
+
+        button.addEventListener("click", () => {
+            const selectedSort = button.dataset.sort;
+
+            if (!["name", "date"].includes(selectedSort)) return;
+
+            if (currentSort === selectedSort) {
                 sortAscending = !sortAscending;
             } else {
-                sortField = field;
+                currentSort = selectedSort;
                 sortAscending = true;
             }
 
@@ -288,11 +416,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Open and close the add student modal
+
+    // 11. Add student modal
+
     const studentModal = getElement("studentModal");
     const addStudentButton = getElement("addStudentButton");
-    const closeModal = getElement("closeModal");
-    const cancelModal = getElement("cancelModal");
+    const closeModalButton = getElement("closeModal");
+    const cancelModalButton = getElement("cancelModal");
     const newStudentForm = getElement("newStudentForm");
 
     function openStudentModal() {
@@ -303,218 +433,389 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function closeStudentModal() {
-        if (!studentModal) return;
+        if (studentModal) {
+            studentModal.hidden = true;
+        }
 
-        studentModal.hidden = true;
-        if (newStudentForm) newStudentForm.reset();
+        newStudentForm?.reset();
     }
 
-    if (addStudentButton) {
-        addStudentButton.addEventListener("click", openStudentModal);
-    }
+    addStudentButton?.addEventListener("click", openStudentModal);
+    closeModalButton?.addEventListener("click", closeStudentModal);
+    cancelModalButton?.addEventListener("click", closeStudentModal);
 
-    if (closeModal) {
-        closeModal.addEventListener("click", closeStudentModal);
-    }
-
-    if (cancelModal) {
-        cancelModal.addEventListener("click", closeStudentModal);
-    }
-
-    if (studentModal) {
-        studentModal.addEventListener("click", function (event) {
-            if (event.target === studentModal) {
-                closeStudentModal();
-            }
-        });
-    }
-
-    // Add a new student to the table
-    if (newStudentForm) {
-        newStudentForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            const name = getElement("newStudentName").value.trim();
-            const email = getElement("newStudentEmail").value.trim();
-            const course = getElement("newStudentCourse").value;
-
-            if (!name || !email || !course) {
-                showToast("Please complete all student details");
-                return;
-            }
-
-            students.unshift({
-                name,
-                email,
-                course,
-                date: new Date().toISOString().slice(0, 10),
-                status: "Pending"
-            });
-
-            saveStudents();
-            renderStudents();
+    studentModal?.addEventListener("click", event => {
+        if (event.target === studentModal) {
             closeStudentModal();
-            showToast("Student added successfully");
+        }
+    });
+
+    newStudentForm?.addEventListener("submit", event => {
+        event.preventDefault();
+
+        const name = getElement("newStudentName")?.value.trim() || "";
+        const email = getElement("newStudentEmail")?.value.trim() || "";
+        const course = getElement("newStudentCourse")?.value || "";
+
+        if (!name || !email || !course) {
+            showToast("Please complete all student details.");
+            return;
+        }
+
+        // find(): check whether the email already belongs to a student
+
+        const existingStudent = students.find(
+            student => student.email.toLowerCase() === email.toLowerCase()
+        );
+
+        if (existingStudent) {
+            showToast("A student with this email already exists.");
+            return;
+        }
+
+        const newStudent = {
+            id: Date.now(),
+            name,
+            email,
+            course,
+            date: new Date().toISOString().slice(0, 10),
+            status: "Active"
+        };
+
+        students.push(newStudent);
+
+        saveStorage("peakprosys-students", students);
+
+        // Reset filters to make the new student visible
+
+        if (studentSearch) studentSearch.value = "";
+        if (statusFilter) statusFilter.value = "all";
+
+        currentSort = "date";
+        sortAscending = false;
+
+        renderStudents();
+        closeStudentModal();
+
+        showToast("Student added successfully.");
+    });
+
+
+    // 12. View all students
+
+    getElement("viewAllStudents")?.addEventListener("click", () => {
+        if (studentSearch) studentSearch.value = "";
+        if (statusFilter) statusFilter.value = "all";
+
+        renderStudents();
+
+        getElement("students")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
         });
+    });
+
+
+    // 13. Export students as CSV
+
+    getElement("exportButton")?.addEventListener("click", () => {
+
+        if (students.length === 0) {
+            showToast("There are no student records to export.");
+            return;
+        }
+
+        // every(): verify that all records contain valid details
+
+        const allStudentsValid = students.every(student =>
+            student.name?.trim() &&
+            student.email?.trim() &&
+            student.course?.trim() &&
+            student.date &&
+            student.status
+        );
+
+        if (!allStudentsValid) {
+            showToast("Some student records are incomplete.");
+            return;
+        }
+
+        const headers = [
+            "ID",
+            "Name",
+            "Email",
+            "Course",
+            "Joined Date",
+            "Status"
+        ];
+
+        // map(): convert student objects into CSV rows
+
+        const csvRows = students.map(student => [
+            student.id,
+            student.name,
+            student.email,
+            student.course,
+            student.date,
+            student.status
+        ]);
+
+        function escapeCSV(value) {
+            return `"${String(value ?? "").replace(/"/g, '""')}"`;
+        }
+
+        const csvContent = [
+            headers,
+            ...csvRows
+        ]
+            .map(row => row.map(escapeCSV).join(","))
+            .join("\n");
+
+        const blob = new Blob(
+            ["\uFEFF" + csvContent],
+            { type: "text/csv;charset=utf-8;" }
+        );
+
+        const downloadUrl = URL.createObjectURL(blob);
+        const downloadLink = document.createElement("a");
+
+        downloadLink.href = downloadUrl;
+        downloadLink.download = "peakprosys-students.csv";
+
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        downloadLink.remove();
+
+        URL.revokeObjectURL(downloadUrl);
+
+        showToast("Student report exported.");
+    });
+
+
+    // 14. Quick tasks
+
+    const defaultTasks = [
+        {
+            id: 1,
+            text: "Review student registrations",
+            completed: false
+        },
+        {
+            id: 2,
+            text: "Prepare weekly batch schedule",
+            completed: true
+        }
+    ];
+
+    let tasks = readStorage("peakprosys-tasks", null);
+
+    if (!Array.isArray(tasks)) {
+        tasks = defaultTasks;
+        saveStorage("peakprosys-tasks", tasks);
     }
 
-    // Load saved tasks or start with an empty list
-    let tasks;
-
-    try {
-        const savedTasks = localStorage.getItem("peakprosys-tasks");
-        tasks = savedTasks ? JSON.parse(savedTasks) : [];
-        if (!Array.isArray(tasks)) tasks = [];
-    } catch {
-        tasks = [];
-    }
+    let activeTaskFilter = "all";
 
     const taskForm = getElement("taskForm");
     const taskInput = getElement("taskInput");
     const taskList = getElement("taskList");
     const taskCounter = getElement("taskCounter");
 
-    // Save tasks in the browser
+
+    // 15. Save tasks
+
     function saveTasks() {
-        localStorage.setItem("peakprosys-tasks", JSON.stringify(tasks));
+        saveStorage("peakprosys-tasks", tasks);
     }
 
-    // Display the task list
 
-// Display tasks with their current status
+    // 16. Render tasks
+
     function renderTasks() {
         if (!taskList) return;
 
         taskList.replaceChildren();
 
-        tasks.forEach((task, index) => {
-            const item = document.createElement("li");
-            item.className = "task-item";
+        // map(): retain each task's original index
+        // filter(): display tasks according to the selected filter
+
+        const filteredTasks = tasks
+            .map((task, index) => ({ task, index }))
+            .filter(({ task }) => {
+
+                if (activeTaskFilter === "pending") {
+                    return !task.completed;
+                }
+
+                if (activeTaskFilter === "completed") {
+                    return task.completed;
+                }
+
+                return true;
+            });
+
+        filteredTasks.forEach(({ task, index }) => {
+
+            const listItem = document.createElement("li");
+            listItem.className = "task-item";
 
             const label = document.createElement("label");
-            const checkbox = document.createElement("input");
-            const text = document.createElement("span");
-            const status = document.createElement("span");
-            const deleteButton = document.createElement("button");
 
+            const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.checked = task.completed;
-            checkbox.setAttribute("aria-label", "Mark task complete");
 
-            text.textContent = task.text;
+            const taskText = document.createElement("span");
+            taskText.textContent = task.text;
 
-            status.textContent = task.completed ? "Completed" : "Pending";
+            if (task.completed) {
+                taskText.classList.add("completed");
+            }
+
+            label.append(checkbox, taskText);
+
+            const status = document.createElement("span");
+
             status.className = task.completed
                 ? "task-status completed"
                 : "task-status pending";
 
+            status.textContent = task.completed
+                ? "Completed"
+                : "Pending";
+
+            const deleteButton = document.createElement("button");
             deleteButton.type = "button";
             deleteButton.textContent = "×";
-            deleteButton.setAttribute("aria-label", "Delete task");
+            deleteButton.setAttribute(
+                "aria-label",
+                `Delete task: ${task.text}`
+            );
 
-            checkbox.addEventListener("change", function () {
-                task.completed = checkbox.checked;
+            checkbox.addEventListener("change", () => {
+                tasks[index].completed = checkbox.checked;
+
                 saveTasks();
                 renderTasks();
             });
 
-            deleteButton.addEventListener("click", function () {
+            deleteButton.addEventListener("click", () => {
                 tasks.splice(index, 1);
+
                 saveTasks();
                 renderTasks();
+
+                showToast("Task deleted.");
             });
 
-            label.append(checkbox, text);
-            item.append(label, status, deleteButton);
-            taskList.appendChild(item);
+            listItem.append(label, status, deleteButton);
+            taskList.appendChild(listItem);
         });
 
-        if (taskCounter) {
-            const remaining = tasks.filter(task => !task.completed).length;
-            taskCounter.textContent = `${remaining} tasks remaining`;
-        }
-    }
+        if (filteredTasks.length === 0) {
+            const emptyMessage = document.createElement("li");
+            emptyMessage.className = "empty-state";
 
-
-    // Add a new task
-    if (taskForm) {
-        taskForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            const text = taskInput.value.trim();
-            if (!text) return;
-
-            tasks.push({
-                text,
-                completed: false
-            });
-
-            saveTasks();
-            renderTasks();
-            taskForm.reset();
-        });
-    }
-
-    // Export student records as a CSV file
-    const exportButton = getElement("exportButton");
-
-    if (exportButton) {
-        exportButton.addEventListener("click", function () {
-            if (students.length === 0) {
-                showToast("No student records to export");
-                return;
+            if (activeTaskFilter === "pending") {
+                emptyMessage.textContent = "No pending tasks.";
+            } else if (activeTaskFilter === "completed") {
+                emptyMessage.textContent = "No completed tasks yet.";
+            } else {
+                emptyMessage.textContent = "No tasks yet. Add your first task.";
             }
 
-            const headers = ["Name", "Email", "Course", "Joining Date", "Status"];
+            taskList.appendChild(emptyMessage);
+        }
 
-            const rows = students.map(student => [
-                student.name,
-                student.email,
-                student.course,
-                student.date,
-                student.status
-            ]);
+        // filter(): count tasks that are not completed
 
-            const csvContent = [headers, ...rows]
-                .map(row => row.map(value =>
-                    `"${String(value).replace(/"/g, '""')}"`
-                ).join(","))
-                .join("\n");
+        const remainingTasks = tasks.filter(
+            task => !task.completed
+        ).length;
 
-            const blob = new Blob(["\uFEFF" + csvContent], {
-                type: "text/csv;charset=utf-8;"
-            });
+        if (taskCounter) {
+            taskCounter.textContent = `${remainingTasks} left`;
+        }
 
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement("a");
+        document.querySelectorAll(".task-filters button").forEach(button => {
+            const isActive = button.dataset.filter === activeTaskFilter;
 
-            link.href = url;
-            link.download = "peakprosys-students.csv";
-            link.click();
-
-            URL.revokeObjectURL(url);
-            showToast("Student report exported");
+            button.classList.toggle("active", isActive);
+            button.setAttribute("aria-pressed", String(isActive));
         });
     }
 
-    // Update the chart period selection
-    const chartPeriod = getElement("chartPeriod");
 
-    if (chartPeriod) {
-        chartPeriod.addEventListener("change", function () {
-            showToast("Selected period: " + this.value);
+    // 17. Add task
+
+    taskForm?.addEventListener("submit", event => {
+        event.preventDefault();
+
+        const taskText = taskInput?.value.trim() || "";
+
+        if (!taskText) {
+            showToast("Please enter a task.");
+            return;
+        }
+
+        tasks.push({
+            id: Date.now(),
+            text: taskText,
+            completed: false
         });
-    }
 
-    // Close the modal with the Escape key
-    document.addEventListener("keydown", function (event) {
+        saveTasks();
+
+        activeTaskFilter = "all";
+        renderTasks();
+
+        taskForm.reset();
+        taskInput?.focus();
+
+        showToast("Task added successfully.");
+    });
+
+
+    // 18. Task filters
+
+    document.querySelectorAll(".task-filters button").forEach(button => {
+
+        button.addEventListener("click", () => {
+            const filter = button.dataset.filter;
+
+            if (!["all", "pending", "completed"].includes(filter)) return;
+
+            activeTaskFilter = filter;
+            renderTasks();
+        });
+    });
+
+
+    // 19. Enrollment chart period
+
+    getElement("chartPeriod")?.addEventListener("change", event => {
+
+        if (event.target.value === "year") {
+            showToast("Yearly chart view selected. Sample chart data is displayed.");
+        } else {
+            showToast("Six-month chart view selected.");
+        }
+    });
+
+
+    // 20. Keyboard accessibility
+
+    document.addEventListener("keydown", event => {
+
         if (event.key === "Escape") {
             closeStudentModal();
             closeSidebar();
         }
     });
 
-    // Show the initial dashboard data
+
+    // 21. Initial dashboard rendering
+
     renderStudents();
     renderTasks();
 

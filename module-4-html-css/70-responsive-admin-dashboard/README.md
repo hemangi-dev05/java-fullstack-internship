@@ -99,6 +99,35 @@ No additional packages or backend setup are required.
 - DOM manipulation updates student records and task lists.
 - localStorage retains demo records and preferences after refreshing.
 
+
+
+## JavaScript Array Methods
+
+Implemented JavaScript array methods in the Training Institute Management System dashboard to process and manage student and task data.
+
+### Methods Implemented
+
+- **map():** Generate student table rows, initials, course summaries and CSV records.
+- **filter():** Search student records, filter students by status and display tasks by category.
+- **reduce():** Calculate course-wise student enrollment.
+- **find():** Identify duplicate student email addresses.
+- **some():** Check whether any student has a pending status.
+- **every():** Validate student records before CSV export.
+- **sort():** Sort student records by name and enrollment date.
+
+### Concepts Practiced
+
+- Array methods and callback functions.
+- Arrow functions.
+- Object and array manipulation.
+- Data transformation and aggregation.
+- DOM manipulation.
+- Practical data processing in JavaScript.
+
+### Verification
+
+Tested student search, status filtering, sorting, duplicate email validation, student addition and CSV export.
+
 ## Scope and Limitations
 
 This is a frontend demonstration using sample student data.
@@ -113,7 +142,3 @@ This is a frontend demonstration using sample student data.
 Practised responsive web design, CSS Grid, Flexbox, JavaScript event handling, DOM manipulation, array methods, browser storage and interactive dashboard development.
 
 ---
-
-**Assignment:** 70 – Responsive Admin Dashboard  
-**Program:** Java Full Stack Development Internship  
-**Organization:** PeakProSys Solutions Pvt. Ltd.
