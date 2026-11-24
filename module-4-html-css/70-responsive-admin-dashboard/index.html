@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PeakProSys Training Institute Management Dashboard">
+    <title>PeakProSys | Training Operations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+
+    <aside class="sidebar" id="sidebar">
+        <a href="#" class="brand">
+            <span class="brand-mark">P</span>
+            <span class="brand-name">peakpro<span>sys</span></span>
+        </a>
+
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="nav-menu" aria-label="Main navigation">
+            <a href="#overview" class="nav-link active" data-page="Overview">
+                <span class="nav-icon">▦</span><span>Overview</span>
+            </a>
+            <a href="#students" class="nav-link" data-page="Students">
+                <span class="nav-icon">♙</span><span>Students</span>
+                <span class="nav-count">248</span>
+            </a>
+            <a href="#courses" class="nav-link" data-page="Courses">
+                <span class="nav-icon">▤</span><span>Courses</span>
+            </a>
+            <a href="#batches" class="nav-link" data-page="Batches">
+                <span class="nav-icon">▥</span><span>Batches</span>
+            </a>
+            <a href="#trainers" class="nav-link" data-page="Trainers">
+                <span class="nav-icon">♧</span><span>Trainers</span>
+            </a>
+            <a href="#attendance" class="nav-link" data-page="Attendance">
+                <span class="nav-icon">◷</span><span>Attendance</span>
+            </a>
+            <a href="#payments" class="nav-link" data-page="Payments">
+                <span class="nav-icon">₹</span><span>Payments</span>
+            </a>
+        </nav>
+
+        <div class="workspace-label tools-label">WORKSPACE TOOLS</div>
+        <nav class="nav-menu">
+            <a href="#schedule" class="nav-link" data-page="Schedule">
+                <span class="nav-icon">▦</span><span>Schedule</span>
+            </a>
+            <a href="#reports" class="nav-link" data-page="Reports">
+                <span class="nav-icon">▨</span><span>Reports</span>
+            </a>
+            <a href="#settings" class="nav-link" data-page="Settings">
+                <span class="nav-icon">⚙</span><span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="help-card">
+                <div class="help-icon">✦</div>
+                <strong>Need a hand?</strong>
+                <p>Visit the help center for product support.</p>
+                <a href="mailto:support@peakprosys.example">Get support ↗</a>
+            </div>
+            <div class="profile-mini">
+                <div class="avatar avatar-purple">AS</div>
+                <div class="profile-info">
+                    <strong>Admin Staff</strong>
+                    <span>Administrator</span>
+                </div>
+                <button class="icon-button profile-more" aria-label="Profile options">•••</button>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-area">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="icon-button menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+                <div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumbPage">Overview</strong></div>
+            </div>
+            <div class="topbar-actions">
+                <span class="date-label" id="currentDate"></span>
+                <button class="icon-button theme-toggle" id="themeToggle" aria-label="Switch theme" title="Switch theme">
+                    <span id="themeIcon">☾</span>
+                </button>
+                <button class="icon-button notification-button" aria-label="Notifications">
+                    ♧<i></i>
+                </button>
+                <div class="topbar-avatar">AS</div>
+            </div>
+        </header>
+
+        <div class="page-content">
+            <section class="welcome-row">
+                <div>
+                    <div class="eyebrow"><span class="live-dot"></span> INSTITUTE OVERVIEW</div>
+                    <h1 id="pageTitle">Good morning, Admin <span class="wave">✦</span></h1>
+                    <p class="welcome-subtitle">Here's what's happening across your institute today.</p>
+                </div>
+                <div class="welcome-actions">
+                    <button class="button button-secondary" id="exportButton">↓ Export report</button>
+                    <button class="button button-primary" id="addStudentButton">＋ Add student</button>
+                </div>
+            </section>
+
+            <section class="metric-grid" aria-label="Institute metrics">
+                <article class="metric-card metric-primary">
+                    <div class="metric-top">
+                        <span>Total students</span>
+                        <span class="metric-symbol">♙</span>
+                    </div>
+                    <div class="metric-value" id="totalStudents">248</div>
+                    <div class="metric-foot"><span class="trend-up">↗ 12.8%</span> <span>vs last month</span></div>
+                    <div class="metric-decoration decoration-one"></div>
+                </article>
+
+                <article class="metric-card">
+                    <div class="metric-top">
+                        <span>Active courses</span>
+                        <span class="metric-symbol symbol-blue">▤</span>
+                    </div>
+                    <div class="metric-value">12</div>
+                    <div class="metric-foot"><span class="trend-up">↗ 2 new</span> <span>this quarter</span></div>
+                </article>
+
+                <article class="metric-card">
+                    <div class="metric-top">
+                        <span>Today's attendance</span>
+                        <span class="metric-symbol symbol-green">◷</span>
+                    </div>
+                    <div class="metric-value">86<span class="metric-unit">%</span></div>
+                    <div class="metric-foot"><span class="trend-up">↗ 4.2%</span> <span>vs last week</span></div>
+                </article>
+
+                <article class="metric-card">
+                    <div class="metric-top">
+                        <span>Fee collection</span>
+                        <span class="metric-symbol symbol-orange">₹</span>
+                    </div>
+                    <div class="metric-value">₹4.8L</div>
+                    <div class="metric-foot"><span class="trend-up">↗ 8.6%</span> <span>this month</span></div>
+                </article>
+            </section>
+
+            <section class="dashboard-grid">
+                <article class="panel enrollment-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="section-kicker">PERFORMANCE</span>
+                            <h2>Enrollment overview</h2>
+                            <p class="panel-description">Student enrollment activity through the year</p>
+                        </div>
+                        <select id="chartPeriod" class="select-control" aria-label="Enrollment chart period">
+                            <option value="year">This year</option>
+                            <option value="half">Last 6 months</option>
+                        </select>
+                    </div>
+                    <div class="chart-summary">
+                        <strong>248 <span class="trend-up">↗ 12.8%</span></strong>
+                        <span>Total enrolled students</span>
+                    </div>
+                    <div class="chart" id="enrollmentChart" aria-label="Monthly student enrollment chart">
+                        <div class="chart-y-axis">
+                            <span>80</span><span>60</span><span>40</span><span>20</span><span>0</span>
+                        </div>
+                        <div class="chart-content">
+                            <div class="chart-grid-lines"><i></i><i></i><i></i><i></i><i></i></div>
+                            <div class="bar-group">
+                                <div class="bar-item"><div class="bar" style="--bar-height:42%"></div><span>Jan</span></div>
+                                <div class="bar-item"><div class="bar" style="--bar-height:58%"></div><span>Feb</span></div>
+                                <div class="bar-item"><div class="bar" style="--bar-height:48%"></div><span>Mar</span></div>
+                                <div class="bar-item"><div class="bar" style="--bar-height:70%"></div><span>Apr</span></div>
+                                <div class="bar-item"><div class="bar" style="--bar-height:61%"></div><span>May</span></div>
+                                <div class="bar-item"><div class="bar" style="--bar-height:82%"></div><span>Jun</span></div>
+                                <div class="bar-item"><div class="bar" style="--bar-height:66%"></div><span>Jul</span></div>
+                                <div class="bar-item"><div class="bar" style="--bar-height:92%"></div><span>Aug</span></div>
+                                <div class="bar-item"><div class="bar" style="--bar-height:74%"></div><span>Sep</span></div>
+                                <div class="bar-item"><div class="bar" style="--bar-height:100%"></div><span>Oct</span></div>
+                                <div class="bar-item"><div class="bar" style="--bar-height:85%"></div><span>Nov</span></div>
+                                <div class="bar-item"><div class="bar" style="--bar-height:94%"></div><span>Dec</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="panel attendance-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="section-kicker">DAILY SNAPSHOT</span>
+                            <h2>Attendance</h2>
+                            <p class="panel-description">Today's student participation</p>
+                        </div>
+                        <span class="soft-badge badge-green">Today</span>
+                    </div>
+                    <div class="attendance-visual">
+                        <div class="donut-chart"><div class="donut-inner"><strong>86%</strong><span>Present</span></div></div>
+                    </div>
+                    <div class="attendance-legend">
+                        <div><span class="legend-dot present-dot"></span><span>Present</span><strong>213</strong></div>
+                        <div><span class="legend-dot absent-dot"></span><span>Absent</span><strong>27</strong></div>
+                        <div><span class="legend-dot leave-dot"></span><span>On leave</span><strong>8</strong></div>
+                    </div>
+                </article>
+
+                <article class="panel students-panel" id="studentsSection">
+                    <div class="panel-heading students-heading">
+                        <div>
+                            <span class="section-kicker">PEOPLE</span>
+                            <h2>Recently enrolled students</h2>
+                            <p class="panel-description">Keep track of your latest admissions</p>
+                        </div>
+                        <button class="text-button" id="viewAllStudents">View all ↗</button>
+                    </div>
+
+                    <div class="table-toolbar">
+                        <label class="search-box">
+                            <span>⌕</span>
+                            <input type="search" id="studentSearch" placeholder="Search students..." aria-label="Search students">
+                        </label>
+                        <select id="statusFilter" class="select-control" aria-label="Filter students by status">
+                            <option value="all">All statuses</option>
+                            <option value="Active">Active</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="student-table">
+                            <thead>
+                            <tr>
+                                <th><button class="sort-button" data-sort="name">STUDENT ↕</button></th>
+                                <th>COURSE</th>
+                                <th><button class="sort-button" data-sort="date">JOINED ↕</button></th>
+                                <th>STATUS</th>
+                            </tr>
+                            </thead>
+                            <tbody id="studentTableBody"></tbody>
+                        </table>
+                        <div class="empty-state" id="emptyStudents" hidden>No students match your search.</div>
+                    </div>
+                    <div class="table-footer"><span id="studentCount">Showing 5 students</span><span>Sample institute data</span></div>
+                </article>
+
+                <div class="right-column">
+                    <article class="panel courses-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <span class="section-kicker">LEARNING</span>
+                                <h2>Popular courses</h2>
+                            </div>
+                            <button class="more-button" aria-label="More course options">•••</button>
+                        </div>
+                        <div class="course-list">
+                            <div class="course-item">
+                                <div class="course-icon course-java">J</div>
+                                <div class="course-info"><strong>Java Full Stack</strong><span>64 enrolled students</span></div>
+                                <span class="course-percent">82%</span>
+                            </div>
+                            <div class="course-progress"><span style="width:82%"></span></div>
+                            <div class="course-item">
+                                <div class="course-icon course-python">Py</div>
+                                <div class="course-info"><strong>Python Development</strong><span>48 enrolled students</span></div>
+                                <span class="course-percent">68%</span>
+                            </div>
+                            <div class="course-progress"><span style="width:68%"></span></div>
+                            <div class="course-item">
+                                <div class="course-icon course-web">W</div>
+                                <div class="course-info"><strong>Web Development</strong><span>39 enrolled students</span></div>
+                                <span class="course-percent">54%</span>
+                            </div>
+                            <div class="course-progress"><span style="width:54%"></span></div>
+                        </div>
+                    </article>
+
+                    <article class="panel tasks-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <span class="section-kicker">YOUR WORKSPACE</span>
+                                <h2>Quick tasks</h2>
+                            </div>
+                            <span class="task-counter" id="taskCounter">0 left</span>
+                        </div>
+                        <form id="taskForm" class="task-form">
+                            <input id="taskInput" type="text" placeholder="Add a reminder..." maxlength="80" required>
+                            <button type="submit" aria-label="Add task">＋</button>
+                        </form>
+                        <ul class="task-list" id="taskList"></ul>
+                    </article>
+
+                    <article class="notice-card">
+                        <div class="notice-icon">✦</div>
+                        <div><strong>Stay on top of things</strong><p>Review pending fee payments before the end of the week.</p></div>
+                        <span>→</span>
+                    </article>
+                </div>
+            </section>
+
+            <footer class="page-footer">
+                <span>© 2026 PeakProSys Training Institute</span>
+                <span>Training operations dashboard <i></i> Demo environment</span>
+            </footer>
+        </div>
+    </main>
+</div>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="modal-backdrop" id="studentModal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-heading">
+            <div><span class="section-kicker">STUDENT MANAGEMENT</span><h2 id="modalTitle">Add a student</h2></div>
+            <button class="icon-button" id="closeModal" aria-label="Close dialog">✕</button>
+        </div>
+        <form id="newStudentForm">
+            <label>Full name<input type="text" id="newStudentName" required minlength="2" placeholder="Enter student name"></label>
+            <label>Email address<input type="email" id="newStudentEmail" required placeholder="student@example.com"></label>
+            <label>Course
+                <select id="newStudentCourse" required>
+                    <option value="">Choose a course</option>
+                    <option>Java Full Stack</option>
+                    <option>Python Development</option>
+                    <option>Web Development</option>
+                    <option>Data Analytics</option>
+                </select>
+            </label>
+            <div class="modal-actions">
+                <button type="button" class="button button-secondary" id="cancelModal">Cancel</button>
+                <button type="submit" class="button button-primary">Save student</button>
+            </div>
+        </form>
+        <p class="modal-note">Demo only: this student is stored in this browser session's local storage, not a server.</p>
+    </section>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="script.js"></script>
+</body>
+</html>
