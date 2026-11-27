@@ -1,8 +1,7 @@
+
 package com.internship.module1.shapecalculator;
 
-// Parent class. Every shape has a name, an area and a perimeter.
-// The child classes override area() and perimeter() with their own formulas.
-public class Shape {
+public abstract class Shape {
 
     protected String name;
 
@@ -10,19 +9,16 @@ public class Shape {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
+    public abstract double area();
 
-    public double area() {
-        return 0;
-    }
-
-    public double perimeter() {
-        return 0;
-    }
+    public abstract double perimeter();
 
     public void display() {
-        System.out.printf("%s -> Area: %.2f, Perimeter: %.2f%n", name, area(), perimeter());
+
+        System.out.println(
+                name +
+                        " | Area: " + String.format("%.2f", area()) +
+                        " | Perimeter: " + String.format("%.2f", perimeter())
+        );
     }
 }

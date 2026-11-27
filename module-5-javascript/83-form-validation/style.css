@@ -1,0 +1,148 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f4f9;
+    color: #172033;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 16px;
+}
+
+.registration-container {
+    width: 100%;
+    max-width: 520px;
+}
+
+.form-card {
+    background: #ffffff;
+    padding: 36px;
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(20, 35, 60, 0.08);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.brand {
+    color: #4169e1;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.form-header h1 {
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+.form-header p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 13px;
+    border: 1px solid #d8deea;
+    border-radius: 7px;
+    font-size: 14px;
+    outline: none;
+    background: #ffffff;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #4169e1;
+    box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.1);
+}
+
+.form-group input.invalid,
+.form-group select.invalid {
+    border-color: #dc3545;
+}
+
+.error-message {
+    display: block;
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 6px;
+    min-height: 14px;
+}
+
+.terms {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 13px;
+    color: #475569;
+    margin: 8px 0 4px;
+}
+
+.terms input {
+    accent-color: #4169e1;
+}
+
+.submit-button {
+    width: 100%;
+    border: none;
+    background: #4169e1;
+    color: white;
+    padding: 13px;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+.submit-button:hover {
+    background: #3154c5;
+}
+
+.success-message {
+    color: #16834a;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+footer {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 12px;
+    margin-top: 25px;
+}
+
+@media (max-width: 480px) {
+    .form-card {
+        padding: 24px 18px;
+    }
+
+    .form-header h1 {
+        font-size: 23px;
+    }
+}

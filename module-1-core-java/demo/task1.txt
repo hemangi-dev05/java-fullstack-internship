@@ -1,0 +1,39 @@
+1
+101
+Hemangi Pandey
+Java Full Stack
+22
+hemangi@gmail.com
+1
+102
+Rahul Sharma
+Python
+21
+rahul@gmail.com
+1
+103
+Priya Patil
+Web Development
+10
+priya@gmail.com
+1
+103
+Priya Patil
+Web Development
+20
+rahul@gmail.com
+2
+3
+102
+4
+hem
+5
+102
+Rahul Sharma
+Full Stack
+23
+rahul.sharma@gmail.com
+6
+101
+2
+0

@@ -106,6 +106,7 @@ public class Main {
         System.out.print("Enter name to search: ");
         String keyword = sc.nextLine().trim();
         ArrayList<Student> result = manager.searchByName(keyword);
+
         if (result.size() == 0) {
             System.out.println("No matching students.");
         } else {

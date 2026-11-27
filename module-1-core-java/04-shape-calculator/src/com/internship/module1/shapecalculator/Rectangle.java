@@ -1,5 +1,6 @@
 package com.internship.module1.shapecalculator;
 
+
 public class Rectangle extends Shape {
 
     private double length;
